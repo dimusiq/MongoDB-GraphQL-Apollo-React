@@ -15,7 +15,7 @@ async function initServer(){
     await apolloServer.start();
     apolloServer.applyMiddleware({ app })
     app.use((req, res) => {
-        res.send("Server start and running!")
+        res.send('Server start and running!')
     })
     const PORT = process.env.PORT || 5000;
     try {

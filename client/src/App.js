@@ -1,17 +1,15 @@
 import './App.css';
-import { LockClosedIcon } from '@heroicons/react/solid';
+import { GET_TODOS } from './graphql/query';
+import { useQuery } from '@apollo/client';
 
-const people = [
-  {
-    title: 'сделать то-то',
-    details: 'сделать это',
-  },
-  // More todos...
-]
 
 function App() {
+  const {loading, error, data} = useQuery(GET_TODOS);
+  if(loading) return <p>Загрузка...</p>
+  if(error) return <p>{error.message}</p>
+  console.log(data);
   return (
-  < div className='todo-container'>
+  <div className='todo-container'>
     <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <div>
@@ -97,17 +95,17 @@ function App() {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {people.map((person) => (
-                  <tr key={person.email}>
+                {data?.getTodos.map(todo => (
+                  <tr>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         <div className="ml-4">
-                          <div className="text-sm font-medium text-gray-900">{person.title}</div>
+                          <div className="text-sm font-medium text-gray-900">{todo.title}</div>
                         </div>
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{person.details}</div>
+                      <div className="text-sm text-gray-900">{todo.detail}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
