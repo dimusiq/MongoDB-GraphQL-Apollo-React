@@ -10,4 +10,4 @@ export const GET_TODOS = gql`
         date
     }
 }
-`;
+`
