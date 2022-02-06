@@ -1,11 +1,15 @@
 import './App.css';
+import React, { useState } from 'react';
 import Todo from './components/Todo';
 import { GET_TODOS } from './graphql/query';
 import { useQuery } from '@apollo/client';
 import AddTodos from './components/addTodos';
 
+
+
 function App() {
-  const { id, loading, error, data} = useQuery(GET_TODOS);
+
+  const { loading, error, data} = useQuery(GET_TODOS);
   if(loading) return <p>Загрузка...</p>
   if(error) return <p>{error.message}</p>
   console.log(data);
@@ -13,6 +17,7 @@ function App() {
   return (
   <div className='todo-container'>
     <AddTodos />
+      
     <div className="flex flex-col">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">

@@ -33,7 +33,7 @@ const Todo =({ id, title, detail, date }) => {
         Активно
         </span>
     </td>
-    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{moment(date).format("MMMM DD YYYY") }</td>
+    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{moment(date).format("DD MMMM YYYY") }</td>
     <td  className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
         <a onClick={() => removeTodo(id)} href="/#" className="text-indigo-600 hover:text-indigo-900">
         Удалить
