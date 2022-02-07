@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from 'react';
+import React from 'react';
 import Todo from './components/Todo';
 import { GET_TODOS } from './graphql/query';
 import { useQuery } from '@apollo/client';
@@ -63,7 +63,7 @@ function App() {
                   id={todo.id}
                   title={todo.title}
                   detail={todo.detail}
-                  date={todo}
+                  date={todo.date}
                 />
                 ))}
               </tbody>
