@@ -2,18 +2,17 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_TODO } from '../graphql/mutation';
 import { GET_TODOS } from '../graphql/query';
-import moment from 'moment';
-import 'moment/locale/ru';
-
 import DatePicker from 'react-datepicker';
+import dateFns from "date-fns";
 import 'react-datepicker/dist/react-datepicker.css';
+
 
 
 const AddTodos = () => {
     const [todo, setTodo] = useState({
         title:'',
         detail:'',
-        date: ''
+        date: '',
     })
     const [addTodo] = useMutation(ADD_TODO)
     const onSubmit = e => {
@@ -28,6 +27,8 @@ const AddTodos = () => {
             ]
         })
     }
+    const [selectedDate, setStartDate] = useState(new Date());
+
     return (
     <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
     <div className="max-w-md w-full space-y-8">
@@ -71,17 +72,22 @@ const AddTodos = () => {
             </div>
         </div>
         <div className="relative">
+            
             <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
             <svg className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" /></svg>
             </div>
             <DatePicker
-                onSubmit={onSubmit}
                 id="date"
-                value={(todo.date)}
+                selected={selectedDate}
+                onSelect={(date) => setStartDate(date)}
+                value={todo.date}
                 onChange={(date) => setTodo({...todo, date})}
                 dateFormat="dd MM yyyy"
                 className={'bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'}
                 showDisabledMonthNavigation
+                autoComplete='off'
+                placeholderText="Выберите дату"
+
             />
         </div>
         <div>
