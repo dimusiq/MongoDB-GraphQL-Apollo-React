@@ -1,4 +1,7 @@
 import Todo from '../models/Todo.js';
+import jwt from "jsonwebtoken";
+import { users } from '../data/data.js';
+
 
 const resolvers = {
     Query: {
@@ -9,7 +12,13 @@ const resolvers = {
         getTodo: async ( root, args ) => {
             const todo = await Todo.findById(args.id);
             return todo
-        }
+        },
+        user(root, { id }) {
+            return users.find(user => user.id === id);
+        },
+        viewer(root, args, { user }) {
+            return users.find(({ id }) => id === user.sub);
+        },
     },
     Mutation:{
         addTodo: async ( root, args ) => {
@@ -37,6 +46,16 @@ const resolvers = {
             const todo = await Todo.findByIdAndUpdate(id, updateTodo, { new: true })
             return todo;
         },
+        login(root, { email, password }) {
+            const { id, permissions, roles } = users.find(
+                user => user.email === email && user.password === password
+            );
+            return jwt.sign(
+            { "https://spaceapi.com/graphql": { roles, permissions } },
+            "SUPER_SECRET",
+            { algorithm: "HS256", subject: id, expiresIn: "1d" }
+            );
+        }
     }
 }
 

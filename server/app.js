@@ -1,4 +1,5 @@
 import express from 'express';
+import expressJwt from 'express-jwt';
 import {ApolloServer, gql} from 'apollo-server-express';
 import typeDefs from './schema.js';
 import resolvers from './resolvers/resolvers.js';
@@ -6,13 +7,28 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import cors from 'cors';
 
+
 async function initServer(){
     const app = express();
-    app.use(cors());
+    app.use(cors(),
+    expressJwt({
+        secret: 'SUPER_SECRET',
+        algorithms: ["HS256"],
+        credentialsRequired: false
+    })
+    );
     dotenv.config();
 
-    const apolloServer = new ApolloServer({ typeDefs, resolvers })
+    const apolloServer = new ApolloServer({ 
+        typeDefs, 
+        resolvers,
+        context: ({ req }) => {
+            const user = req.user || null;
+            return { user };
+        }
+    })
     await apolloServer.start();
+    
     apolloServer.applyMiddleware({ app })
     app.use((req, res) => {
         res.send('Server start and running!')
