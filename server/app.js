@@ -10,13 +10,7 @@ import cors from 'cors';
 
 async function initServer(){
     const app = express();
-    app.use(cors(),
-    expressJwt({
-        secret: 'SUPER_SECRET',
-        algorithms: ["HS256"],
-        credentialsRequired: false
-    })
-    );
+    app.use(cors());
     dotenv.config();
 
     const apolloServer = new ApolloServer({ 
