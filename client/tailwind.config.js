@@ -1,8 +1,9 @@
 module.exports = {
   content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
+    './public/index.html',
+    './src/**/*.{js,jsx,ts,tsx}',
     './src/components/*.{html,js}',
-    "./node_modules/flowbite/**/*.js",
+    './node_modules/flowbite/**/*.js',
   ],
   theme: {
     extend: {},

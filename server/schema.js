@@ -7,6 +7,8 @@ type Todo{
     title: String
     detail: String
     date: Date
+    username: String!
+
 }
 
 type Query{

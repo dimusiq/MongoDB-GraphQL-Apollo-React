@@ -4,9 +4,13 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
     username: String,
     password: String,
-    email: String
+    email: String,
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'users'
     },
-    {timestamp:true})
+    },
+{timestamp:true})
 
 const User = mongoose.model('User', userSchema);
 
