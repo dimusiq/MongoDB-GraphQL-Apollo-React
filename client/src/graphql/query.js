@@ -8,6 +8,7 @@ export const GET_TODOS = gql`
         title
         detail
         date
+        username
     }
 }
 `

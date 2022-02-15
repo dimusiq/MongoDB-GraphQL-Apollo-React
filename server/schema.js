@@ -7,14 +7,14 @@ type Todo{
     title: String
     detail: String
     date: Date
-    username: String!
+    username: String
 
 }
 
 type Query{
     getTodos:[Todo]
     getTodo(id:ID):Todo
-    user(id: ID!): User
+    user(id: ID!): User!
 }
 
 type User {

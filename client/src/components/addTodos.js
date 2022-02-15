@@ -3,7 +3,6 @@ import { useMutation } from '@apollo/client';
 import { ADD_TODO } from '../graphql/mutation';
 import { GET_TODOS } from '../graphql/query';
 import DatePicker from 'react-datepicker';
-import dateFns from "date-fns";
 import 'react-datepicker/dist/react-datepicker.css';
 
 
@@ -13,6 +12,7 @@ const AddTodos = () => {
         title:'',
         detail:'',
         date: '',
+        username: '',
     })
     const [addTodo] = useMutation(ADD_TODO)
     const onSubmit = e => {
@@ -22,6 +22,7 @@ const AddTodos = () => {
                 title:todo.title,
                 detail:todo.detail,
                 date:todo.date,
+                username:todo.username,
             }, refetchQueries: [
                 { query: GET_TODOS }
             ]

@@ -9,7 +9,7 @@ import AddTodos from './components/AddTodos';
 
 
 
-function App() {
+export default function Main() {
 
   const { loading, error, data} = useQuery(GET_TODOS);
   if(loading) return <p>Загрузка...</p>
@@ -26,12 +26,6 @@ function App() {
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-20">
                 <tr>
-                      <th
-                    scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  >
-                    Имя
-                  </th>
                   <th
                     scope="col"
                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -78,5 +72,3 @@ function App() {
 </div>
   );
 }
-
-export default App;

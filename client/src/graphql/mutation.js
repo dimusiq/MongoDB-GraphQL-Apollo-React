@@ -7,6 +7,7 @@ export const ADD_TODO = gql`
             title
             detail
             date
+            username
     }
 }
 `

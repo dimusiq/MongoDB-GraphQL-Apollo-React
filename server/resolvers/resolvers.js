@@ -1,8 +1,8 @@
-
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import Todo from '../models/Todo.js';
 import User from '../models/User.js';
+
 import { validateRegisterInput, validateLoginInput } from '../util/validators.js';
 
 
