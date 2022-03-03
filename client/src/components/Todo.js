@@ -24,8 +24,8 @@ const Todo =({ id, title, detail, date, username }) => {
                           <img className="h-10 w-10 rounded-full" src={username} alt="" />
                         </div>
                         <div className="ml-4">
-                          <div className="text-sm font-medium text-gray-900">{username}</div>
-                          <div className="text-sm text-gray-500">{"username"}</div>
+                        <div className="text-sm font-medium text-gray-900">{username}</div>
+                        <div className="text-sm text-gray-500">{"username"}</div>
                         </div>
                       </div>
                     </td>
