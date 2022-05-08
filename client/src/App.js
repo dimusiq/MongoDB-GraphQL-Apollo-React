@@ -4,8 +4,7 @@ import './App.css';
 import Todo from './components/Todo';
 import { GET_TODOS } from './graphql/query';
 import { useQuery } from '@apollo/client';
-import AddTodos from './components/AddTodos';
-
+import AddTodos from './components/addTodos';
 
 
 
@@ -18,6 +17,7 @@ function App() {
 
   return (
   <div className='todo-container'>
+
     <AddTodos />
     <div className="flex flex-col">
       <div className=" -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
