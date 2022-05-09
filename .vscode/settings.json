@@ -1,0 +1,14 @@
+{
+  "prettier.vueIndentScriptAndStyle": false,
+  "prettier.useTabs": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.trailingComma": "all",
+  "prettier.singleQuote": true,
+  "prettier.resolveGlobalModules": true,
+  "prettier.jsxSingleQuote": true,
+  "prettier.jsxBracketSameLine": false,
+  "prettier.enableDebugLogs": false,
+  "editor.formatOnSave": true,
+  "prettier.endOfLine": "lf",
+  "editor.formatOnSaveMode": "file"
+}

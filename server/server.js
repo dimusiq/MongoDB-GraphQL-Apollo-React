@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
 const typeDefs = require('./graphql/schema/typeDefs');
-const resolvers = require('./graphql/resolvers');
+const resolvers = require('./graphql/resolvers/index');
 
 dotenv.config();
 const PORT = process.env.PORT || 5000;
@@ -21,5 +21,5 @@ mongoose
 		return server.listen({ port: 5000 });
 	})
 	.then((res) => {
-		console.log(`Express server is up and running on port ${res.port}`);
+		console.log(`Apollo server is up and running on port ${res.port}`);
 	});
