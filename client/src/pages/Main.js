@@ -1,10 +1,12 @@
 import React from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 import Todo from './components/Todo';
 import { GET_TODOS } from './graphql/query';
 import { useQuery } from '@apollo/client';
 import AddTodos from './components/AddTodos';
+
+import { CalendarIcon } from '@heroicons/react/solid';
+
 
 export default function Main() {
   const { loading, error, data } = useQuery(GET_TODOS);

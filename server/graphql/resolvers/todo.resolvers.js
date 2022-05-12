@@ -1,5 +1,5 @@
-const todo = require('../../models/todo.model');
-const user = require('../../models/user.model');
+const Todo = require('../../models/todo.model');
+const User = require('../../models/user.model');
 
 module.exports = {
   Query: {
@@ -7,16 +7,16 @@ module.exports = {
       const todos = await Todo.find();
       return todos;
     },
-    getTodo: async (root, args) => {
+    getTodo: async (_, args) => {
       const todo = await Todo.findById(args.id);
       return todo;
     },
-    user: async (root, { id }) => {
-      return users.find((user) => user.id === id);
-    },
+    // user: async (_, { id }) => {
+    //   return users.find((user) => user.id === id);
+    // },
   },
   Mutation: {
-    addTodo: async (root, args, context) => {
+    addTodo: async (_, args, context) => {
       // const user = checkAuth(context);
       const newTodo = new Todo({
         title: args.title,
@@ -26,14 +26,14 @@ module.exports = {
       await newTodo.save();
       return newTodo;
     },
-    deleteTodo: async (root, args, context) => {
+    deleteTodo: async (_, args, context) => {
       // const user = checkAuth(context);
-      if (user.username === post.username) {
-        await Todo.findByIdAndDelete(args.id);
-        return 'Todo deleted successfully';
-      }
+      // if (user.username === post.username) {
+      //   await Todo.findByIdAndDelete(args.id);
+      //   return 'Todo deleted successfully';
+      // }
     },
-    updateTodo: async (root, args) => {
+    updateTodo: async (_, args) => {
       const { id, title, detail, date } = args;
       const updateTodo = {};
       if (title != undefined) {
