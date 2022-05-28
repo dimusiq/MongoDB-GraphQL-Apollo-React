@@ -1,16 +1,20 @@
 import Todo from './delete-todo.component';
+import { useContext } from 'react';
 import { GET_TODOS } from '../graphql/query';
 import { useQuery } from '@apollo/client';
+import { AuthContext } from '../context/authContext';
 
+function TodoList() {
+  const { user } = useContext(AuthContext);
 
-function  TodoList() {
-    const { loading, error, data } = useQuery(GET_TODOS);
+  const { loading, error, data } = useQuery(GET_TODOS);
 
   if (loading) return <p>Загрузка...</p>;
   if (error) return <p>{error.message}</p>;
   console.log(data);
+
   return (
- <div className='todo-container'>
+    <div className='todo-container'>
       <div className='flex flex-col'>
         <div className=' -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
           <div className=' py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8'>
@@ -18,40 +22,22 @@ function  TodoList() {
               <table className='min-w-full divide-y divide-gray-200'>
                 <thead className='bg-gray-20'>
                   <tr>
-                    <th
-                      scope='col'
-                      className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
-                    >
+                    <th scope='col' className='column'>
                       Имя
                     </th>
-                    <th
-                      scope='col'
-                      className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
-                    >
+                    <th scope='col' className='column'>
                       Заголовок
                     </th>
-                    <th
-                      scope='col'
-                      className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
-                    >
+                    <th scope='col' className='column'>
                       Задание
                     </th>
-                    <th
-                      scope='col'
-                      className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
-                    >
+                    <th scope='col' className='column'>
                       Статус
                     </th>
-                    <th
-                      scope='col'
-                      className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
-                    >
+                    <th scope='col' className='column'>
                       Дата
                     </th>
-                    <th
-                      scope='col'
-                      className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
-                    >
+                    <th scope='col' className='column'>
                       <span className='sr-only'></span>
                     </th>
                   </tr>
@@ -61,6 +47,7 @@ function  TodoList() {
                     <Todo
                       key={todo.id}
                       id={todo.id}
+                      user={todo.username}
                       title={todo.title}
                       detail={todo.detail}
                       date={todo.date}
@@ -73,7 +60,7 @@ function  TodoList() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default TodoList
+export default TodoList;

@@ -1,46 +1,33 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_TODO } from '../graphql/mutation';
 import { GET_TODOS } from '../graphql/query';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { CalendarIcon } from '@heroicons/react/solid'
 
 const AddTodos = () => {
   const [todo, setTodo] = useState({
+    username: '',
     title: '',
     detail: '',
     date: '',
-    username: '',
   });
   const [addTodo] = useMutation(ADD_TODO);
   const onSubmit = (e) => {
     e.preventDefault();
     addTodo({
       variables: {
+        username: todo.username,
         title: todo.title,
         detail: todo.detail,
         date: todo.date,
-        username: todo.username,
       },
       refetchQueries: [{ query: GET_TODOS }],
     });
   };
 
-
   const [selectedDate, setStartDate] = useState(new Date());
-  
-  const Calendar = React.forwardRef((props, ref) => {
-  return (
-    <div className='                bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'>
-      {' '}
-      <label onClick={props.onClick} ref={ref}>
-        {props.value || props.placeholder}
-      </label>
-      <CalendarIcon onClick={props.onClick} />
-    </div>
-  );
-});
+
 
   return (
     <div className='min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8'>
@@ -60,6 +47,7 @@ const AddTodos = () => {
           className='mt-8 space-y-6'
           action='#'
           method='POST'
+          value={todo.username}
         >
           <input type='hidden' name='remember' defaultValue='true' />
           <div className='rounded shadow-sm -space-y-px'>
@@ -68,7 +56,7 @@ const AddTodos = () => {
               <input
                 id='title'
                 required
-                className='appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
+                className='input-style'
                 placeholder='Заголовок'
                 value={todo.title}
                 onChange={(e) => setTodo({ ...todo, title: e.target.value })}
@@ -78,9 +66,8 @@ const AddTodos = () => {
               <label htmlFor='password' className='sr-only'>
                 Todo details
               </label>
-
               <textarea
-                className='appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
+                className='appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
                 id='detail'
                 type='textarea'
                 rows={3}
@@ -97,20 +84,14 @@ const AddTodos = () => {
               value={todo.date}
               onChange={(date) => setTodo({ ...todo, date })}
               dateFormat='dd MM yyyy'
-              className=
-                'bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+              className='input-style'
               showDisabledMonthNavigation
               autoComplete='off'
               placeholderText='Выберите дату'
-            >
-      
-            </DatePicker>
+            ></DatePicker>
           </div>
           <div>
-            <button
-              type='submit'
-              className='group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-            >
+            <button type='submit' className='btn'>
               Добавить Задание
             </button>
           </div>

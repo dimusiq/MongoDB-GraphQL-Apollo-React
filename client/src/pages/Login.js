@@ -110,7 +110,6 @@ function Login(props) {
             <button
               className='btn'
               type='submit'
-              
               onClick={onSubmit}t
             >
               <span className='absolute left-0 inset-y-0 flex items-center pl-3'>

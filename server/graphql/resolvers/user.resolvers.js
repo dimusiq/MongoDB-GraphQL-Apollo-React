@@ -5,7 +5,7 @@ const generateToken = require('../../token/jwt');
 
 module.exports = {
   Mutation: {
-    async registerUser(_, { registerInput: { username, email, password } }) {
+    async registerUser(_, { registerInput: { username, email, password, confirmPassword } }) {
       //Do input validation
       if (!username || !email || !password) {
         res.status(400);
@@ -16,7 +16,7 @@ module.exports = {
 
       if (userExists) {
         throw new ApolloError(
-          'A user is already registered with the email: ' + email,
+          'User is already registered with the email: ' + email,
           'USER_ALREADY_EXISTS',
         );
       }
@@ -30,14 +30,15 @@ module.exports = {
         username: username,
         email: email.toLowerCase(),
         password: encryptedPassword,
+        createdAt: new Date().toISOString(),
       });
 
       newUser.token = generateToken(newUser);
 
       const res = await newUser.save();
       return {
-        id: res.id,
         ...res._doc,
+        id: res.id,
       };
     },
     async loginUser(_, { loginInput: { email, password } }) {
@@ -53,8 +54,8 @@ module.exports = {
         user.token = generateToken(user);
 
         return {
-          id: user.id,
           ...user._doc,
+          id: user.id,
         };
       } else {
         throw new ApolloError('Incorrect password', 'INCORRECT_PASSWORD');

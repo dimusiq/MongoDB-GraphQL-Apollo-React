@@ -4,7 +4,7 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "prettier.trailingComma": "all",
   "prettier.singleQuote": true,
-  "prettier.resolveGlobalModules": true,
+  "prettier.resolveGlobalModules": false,
   "prettier.jsxSingleQuote": true,
   "prettier.jsxBracketSameLine": false,
   "prettier.enableDebugLogs": false,

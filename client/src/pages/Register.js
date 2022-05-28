@@ -80,7 +80,6 @@ function Register(props) {
                 type='email'
                 autoComplete='email'
                 required
-                
                 placeholder='Email address'
                 onChange={onChange}
               />
@@ -94,9 +93,7 @@ function Register(props) {
                 id='password'
                 name='password'
                 type='password'
-                autoComplete='current-password'
                 required
-                
                 placeholder='Password'
                 onChange={onChange}
               />
@@ -109,10 +106,8 @@ function Register(props) {
                 className='input-style'
                 id='confirmPassword'
                 name='confirmPassword'
-                type='confirmPassword'
-                autoComplete='current-password'
+                type='Password'
                 required
-                
                 placeholder='Confirm password'
                 onChange={onChange}
               />

@@ -2,32 +2,46 @@ import { gql } from '@apollo/client';
 
 
 const REGISTER_USER = gql`
-  mutation register($registerInput: RegisterInput) {
-    registerUser(registerInput: $registerInput) {
+  mutation register(
+    $username: String!
+    $email: String!
+    $password: String!
+    $confirmPassword: String!
+  ) {
+    registerUser(
+      registerInput: {
+        username: $username
+        email: $email
+        password: $password
+        confirmPassword: $confirmPassword
+      }
+    ) {
+      id
       email
       username
+      createdAt
       token
     }
   }
-`
+`;
 const LOGIN_USER = gql`
 	mutation login($loginInput: LoginInput) {
 		loginUser(loginInput: $loginInput) {
-			email
 			username
-			token
+      email
+			
 		}
 	}
 `;
 
 const ADD_TODO = gql`
-  mutation addTodo($title: String, $detail: String, $date: Date) {
+  mutation addTodo($title: String, $detail: String, $date: Date,) {
     addTodo(title: $title, detail: $detail, date: $date) {
       id
+      username
       title
       detail
       date
-      username
     }
   }
 `;

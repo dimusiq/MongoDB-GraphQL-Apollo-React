@@ -1,39 +1,67 @@
+const { AuthenticationError } = require('apollo-server-errors');
 const Todo = require('../../models/todo.model');
-const User = require('../../models/user.model');
+const checkAuth = require('../../token/auth');
 
 module.exports = {
   Query: {
-    getTodos: async () => {
-      const todos = await Todo.find();
-      return todos;
+    async getTodos() {
+      try {
+        const todos = await Todo.find().sort({ createdAt: -1 });
+        return posts;
+      } catch (err) {
+        throw new Error(err);
+      }
     },
-    getTodo: async (_, args) => {
-      const todo = await Todo.findById(args.id);
-      return todo;
+    async getTodo(_, { todoId }) {
+      try {
+        const todo = await Todo.findById(todoId);
+        if (todo) {
+          return todo;
+        } else {
+          throw new Error('Todo not found');
+        }
+      } catch (err) {
+        throw new Error(err);
+      }
     },
-    // user: async (_, { id }) => {
-    //   return users.find((user) => user.id === id);
-    // },
+    user: async (_, { id }) => {
+      return users.find((user) => user.id === id);
+    },
   },
   Mutation: {
-    addTodo: async (_, args, context) => {
-      // const user = checkAuth(context);
+    async addTodo(_, { content }, context) {
+      const user = checkAuth(context);
+
+      if (content.trim() === '') {
+        throw new Error('Todo body must not be empty');
+      }
+
       const newTodo = new Todo({
-        title: args.title,
-        detail: args.detail,
-        date: args.date,
+        content,
+        user: user.id,
+        username: user.username,
+        createdAt: new Date().toISOString(),
       });
-      await newTodo.save();
-      return newTodo;
+
+      const todo = await newTodo.save();
+      return todo;
     },
-    deleteTodo: async (_, args, context) => {
-      // const user = checkAuth(context);
-      // if (user.username === post.username) {
-      //   await Todo.findByIdAndDelete(args.id);
-      //   return 'Todo deleted successfully';
-      // }
+    async deleteTodo(_, { TodoId }, context) {
+      const user = checkAuth(context);
+
+      try {
+        const Todo = await Todo.findByIde(TodoId);
+        if (user.username === Todo.username) {
+          await Todo.delete();
+          return 'Todo deleted successfully';
+        } else {
+          throw new AuthenticationError('Action not allowed');
+        }
+      } catch (err) {
+        throw new Error(err);
+      }
     },
-    updateTodo: async (_, args) => {
+    async updateTodo(_, args) {
       const { id, title, detail, date } = args;
       const updateTodo = {};
       if (title != undefined) {

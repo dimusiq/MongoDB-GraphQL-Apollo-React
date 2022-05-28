@@ -1,14 +1,13 @@
 const { model, Schema } = require('mongoose');
 
 const todoSchema = new Schema({
-    title: {
-      type: String,
-      required: true,
-    },
-    detail: String,
-    date: Date,
+  content: String,
+  username: String,
+  createdAt: String,
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
   },
-  { timestamp: true },
-);
+});
 
-module.exports = model('todo', todoSchema);
+module.exports = model('Todo', todoSchema);
