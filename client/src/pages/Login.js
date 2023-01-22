@@ -1,7 +1,6 @@
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-
 import { useMutation } from '@apollo/react-hooks';
 import { LOGIN_USER } from '../graphql/mutation';
 
@@ -9,28 +8,31 @@ import { AuthContext } from '../context/authContext';
 import { useForm } from '../hooks/useForm';
 
 function Login(props) {
-	const navigate = useNavigate();
-	const context = useContext(AuthContext);
-	const [errors, setErrors] = useState([]);
+  const navigate = useNavigate();
+  const context = useContext(AuthContext);
+  const [errors, setErrors] = useState({});
 
-	function loginUserCallback() {
-		loginUser();
-	}
-	const { onChange, onSubmit, values } = useForm(loginUserCallback, {
-		email: '',
-		password: '',
-	});
+  function loginUserCallback() {
+    loginUser();
+  }
+  const { onChange, onSubmit, values } = useForm(
+    loginUserCallback,
+    {
+      email: '',
+      password: '',
+    },
+  );
 
-	const [loginUser, { loading }] = useMutation(LOGIN_USER, {
-		update(proxy, { data: { loginUser: userData } }) {
-			context.login(userData);
-			navigate('/');
-		},
-		onError({ graphQLErrors }) {
-			setErrors(graphQLErrors);
-		},
-		variables: { loginInput: values },
-	});
+  const [loginUser, { loading }] = useMutation(LOGIN_USER, {
+    update(_, { data: { loginUser: userData } }) {
+      context.login(userData);
+      navigate('/');
+    },
+    onError({ graphQLErrors }) {
+      setErrors(graphQLErrors);
+    },
+    variables: { loginInput: values },
+  });
   function loginUserCallback() {
     loginUser();
   }
@@ -47,11 +49,22 @@ function Login(props) {
             Войдите в аккаун
           </h2>
         </div>
-        <form className='mt-8 space-y-6' action='#' method='POST'>
-          <input type='hidden' name='remember' defaultValue='true' />
+        <form
+          className='mt-8 space-y-6'
+          action='#'
+          method='POST'
+        >
+          <input
+            type='hidden'
+            name='remember'
+            defaultValue='true'
+          />
           <div className='rounded-md shadow-sm -space-y-px'>
             <div>
-              <label htmlFor='email-address' className='sr-only'>
+              <label
+                htmlFor='email-address'
+                className='sr-only'
+              >
                 Email
               </label>
               <input
@@ -61,7 +74,6 @@ function Login(props) {
                 name='email'
                 type='email'
                 onChange={onChange}
-                
               />
             </div>
             <div>
@@ -100,7 +112,7 @@ function Login(props) {
               <a
                 href='#'
                 className='font-medium text-indigo-600 hover:text-indigo-500'
-                >
+              >
                 Забыли пароль?
               </a>
             </div>
@@ -110,10 +122,10 @@ function Login(props) {
             <button
               className='btn'
               type='submit'
-              onClick={onSubmit}t
+              onClick={onSubmit}
+              t
             >
-              <span className='absolute left-0 inset-y-0 flex items-center pl-3'>
-              </span>
+              <span className='absolute left-0 inset-y-0 flex items-center pl-3'></span>
               Войти
             </button>
           </div>
@@ -123,4 +135,4 @@ function Login(props) {
   );
 }
 
-export default Login
+export default Login;

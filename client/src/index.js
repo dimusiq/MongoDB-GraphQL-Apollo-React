@@ -7,7 +7,9 @@ import { AuthProvider } from './context/authContext';
 import { ApolloProvider } from '@apollo/client';
 import client from './apolloClient';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(
+  document.getElementById('root'),
+);
 root.render(
   <AuthProvider>
     <ApolloProvider client={client}>

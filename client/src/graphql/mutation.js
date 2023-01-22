@@ -1,6 +1,5 @@
 import { gql } from '@apollo/client';
 
-
 const REGISTER_USER = gql`
   mutation register(
     $username: String!
@@ -25,17 +24,16 @@ const REGISTER_USER = gql`
   }
 `;
 const LOGIN_USER = gql`
-	mutation login($loginInput: LoginInput) {
-		loginUser(loginInput: $loginInput) {
-			username
+  mutation login($loginInput: LoginInput) {
+    loginUser(loginInput: $loginInput) {
+      username
       email
-			
-		}
-	}
+    }
+  }
 `;
 
 const ADD_TODO = gql`
-  mutation addTodo($title: String, $detail: String, $date: Date,) {
+  mutation addTodo($title: String, $detail: String, $date: Date) {
     addTodo(title: $title, detail: $detail, date: $date) {
       id
       username
@@ -52,10 +50,4 @@ const DELETE_TODO = gql`
   }
 `;
 
-export {
-  REGISTER_USER,
-  LOGIN_USER,
-  ADD_TODO,
-  DELETE_TODO,
-  
-}
+export { REGISTER_USER, LOGIN_USER, ADD_TODO, DELETE_TODO };

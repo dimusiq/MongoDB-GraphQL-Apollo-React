@@ -21,5 +21,7 @@ mongoose
     return server.listen({ port: 5000 });
   })
   .then((res) => {
-    console.log(`Apollo server is up and running on port ${res.port}`);
+    console.log(
+      `Apollo server is up and running on port ${res.port}`,
+    );
   });

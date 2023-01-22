@@ -1,11 +1,26 @@
 const User = require('../../models/user.model');
+const {
+  ApolloServer,
+  gql,
+  UserInputError,
+} = require('apollo-server');
 const { ApolloError } = require('apollo-server-errors');
 const bcrypt = require('bcryptjs');
 const generateToken = require('../../token/jwt');
 
 module.exports = {
   Mutation: {
-    async registerUser(_, { registerInput: { username, email, password, confirmPassword } }) {
+    async registerUser(
+      _,
+      {
+        registerInput: {
+          username,
+          email,
+          password,
+          confirmPassword,
+        },
+      },
+    ) {
       //Do input validation
       if (!username || !email || !password) {
         res.status(400);
@@ -16,14 +31,18 @@ module.exports = {
 
       if (userExists) {
         throw new ApolloError(
-          'User is already registered with the email: ' + email,
+          'User is already registered with the email: ' +
+            email,
           'USER_ALREADY_EXISTS',
         );
       }
 
       //Hash password
       const salt = await bcrypt.genSalt(10);
-      const encryptedPassword = await bcrypt.hash(password, salt);
+      const encryptedPassword = await bcrypt.hash(
+        password,
+        salt,
+      );
 
       //Create user
       const newUser = new User({
@@ -39,9 +58,13 @@ module.exports = {
       return {
         ...res._doc,
         id: res.id,
+        token,
       };
     },
-    async loginUser(_, { loginInput: { email, password } }) {
+    async loginUser(
+      _,
+      { loginInput: { email, password } },
+    ) {
       // Do input validation
       if (!(email && password)) {
         res.status(400).send('All input is required');
@@ -49,16 +72,23 @@ module.exports = {
 
       const user = await User.findOne({ email });
 
-      if (user && (await bcrypt.compare(password, user.password))) {
+      if (
+        user &&
+        (await bcrypt.compare(password, user.password))
+      ) {
         // save user token
         user.token = generateToken(user);
 
         return {
           ...user._doc,
           id: user.id,
+          token,
         };
       } else {
-        throw new ApolloError('Incorrect password', 'INCORRECT_PASSWORD');
+        throw new ApolloError(
+          'Incorrect password',
+          'INCORRECT_PASSWORD',
+        );
       }
     },
   },

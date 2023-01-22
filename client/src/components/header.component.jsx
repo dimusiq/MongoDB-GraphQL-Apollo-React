@@ -15,10 +15,16 @@ function Header() {
   return (
     <nav className='flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10'>
       <div className='container flex flex-wrap justify-between items-center mx-auto'>
-        <Link to='/'  className='font-medium text-gray-500 hover:text-gray-900'>
+        <Link
+          to='/'
+          className='font-medium text-gray-500 hover:text-gray-900'
+        >
           Главная страница
         </Link>
-        <div className='hidden w-full md:block md:w-auto' id='mobile-menu'>
+        <div
+          className='hidden w-full md:block md:w-auto'
+          id='mobile-menu'
+        >
           <ul className='flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium'>
             <li>
               {user ? (
