@@ -8,7 +8,7 @@ import { ApolloProvider } from '@apollo/client';
 import client from './apolloClient';
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root'),
+  document.getElementById('root')
 );
 root.render(
   <AuthProvider>
@@ -19,5 +19,5 @@ root.render(
         </React.StrictMode>
       </BrowserRouter>
     </ApolloProvider>
-  </AuthProvider>,
+  </AuthProvider>
 );

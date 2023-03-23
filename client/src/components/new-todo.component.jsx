@@ -28,17 +28,16 @@ const AddTodos = () => {
 
   const [selectedDate, setStartDate] = useState(new Date());
 
-
   return (
-    <div className='min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8'>
-      <div className='max-w-md w-full space-y-8'>
+    <div className='flex items-center justify-center min-h-full px-4 py-12 sm:px-6 lg:px-8'>
+      <div className='w-full max-w-md space-y-8'>
         <div>
           <img
-            className='mx-auto h-12 w-auto'
+            className='w-auto h-12 mx-auto'
             src='https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'
             alt='Workflow'
           />
-          <h2 className='mt-6 text-center text-3xl font-extrabold text-gray-900'>
+          <h2 className='mt-6 text-3xl font-extrabold text-center text-gray-900'>
             Добавьте задание
           </h2>
         </div>
@@ -49,8 +48,12 @@ const AddTodos = () => {
           method='POST'
           value={todo.username}
         >
-          <input type='hidden' name='remember' defaultValue='true' />
-          <div className='rounded shadow-sm -space-y-px'>
+          <input
+            type='hidden'
+            name='remember'
+            defaultValue='true'
+          />
+          <div className='-space-y-px rounded shadow-sm'>
             <div>
               <label className='sr-only'>Title</label>
               <input
@@ -59,7 +62,12 @@ const AddTodos = () => {
                 className='input-style'
                 placeholder='Заголовок'
                 value={todo.title}
-                onChange={(e) => setTodo({ ...todo, title: e.target.value })}
+                onChange={(e) =>
+                  setTodo({
+                    ...todo,
+                    title: e.target.value,
+                  })
+                }
               />
             </div>
             <div>
@@ -67,13 +75,18 @@ const AddTodos = () => {
                 Todo details
               </label>
               <textarea
-                className='appearance-none rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
+                className='relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
                 id='detail'
                 type='textarea'
                 rows={3}
                 placeholder='Текст задания'
                 value={todo.detail}
-                onChange={(e) => setTodo({ ...todo, detail: e.target.value })}
+                onChange={(e) =>
+                  setTodo({
+                    ...todo,
+                    detail: e.target.value,
+                  })
+                }
               />
             </div>
 
@@ -82,7 +95,9 @@ const AddTodos = () => {
               selected={selectedDate}
               onSelect={(date) => setStartDate(date)}
               value={todo.date}
-              onChange={(date) => setTodo({ ...todo, date })}
+              onChange={(date) =>
+                setTodo({ ...todo, date })
+              }
               dateFormat='dd MM yyyy'
               className='input-style'
               showDisabledMonthNavigation

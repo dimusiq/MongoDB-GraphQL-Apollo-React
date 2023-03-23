@@ -33,7 +33,11 @@ const LOGIN_USER = gql`
 `;
 
 const ADD_TODO = gql`
-  mutation addTodo($title: String, $detail: String, $date: Date) {
+  mutation addTodo(
+    $title: String
+    $detail: String
+    $date: Date
+  ) {
     addTodo(title: $title, detail: $detail, date: $date) {
       id
       username

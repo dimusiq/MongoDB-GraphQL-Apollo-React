@@ -10,7 +10,7 @@ const Todo = ({ id, title, detail, date, username }) => {
   const removeTodo = (id) => {
     deleteTodo({
       variables: {
-        id: id,
+        id,
       },
       refetchQueries: [{ query: GET_TODOS }],
     });
@@ -19,7 +19,7 @@ const Todo = ({ id, title, detail, date, username }) => {
     <tr>
       <td className='px-6 py-4 whitespace-nowrap'>
         <div className='flex items-center'>
-          <div className='flex-shrink-0 h-10 w-10'></div>
+          <div className='flex-shrink-0 w-10 h-10'></div>
           <div className='ml-4'>
             <div className='text-sm font-medium text-gray-900'>
               {username}
@@ -45,14 +45,14 @@ const Todo = ({ id, title, detail, date, username }) => {
         </div>
       </td>
       <td className='px-6 py-4 whitespace-nowrap'>
-        <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>
+        <span className='inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full'>
           Активно
         </span>
       </td>
-      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+      <td className='px-6 py-4 text-sm text-gray-500 whitespace-nowrap'>
         {moment(date).format('DD MMMM YYYY')}
       </td>
-      <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
+      <td className='px-6 py-4 text-sm font-medium text-right whitespace-nowrap'>
         <a
           onClick={() => removeTodo(id)}
           href='/#'

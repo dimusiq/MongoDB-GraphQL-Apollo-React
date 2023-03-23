@@ -20,7 +20,7 @@ function Login(props) {
     {
       email: '',
       password: '',
-    },
+    }
   );
 
   const [loginUser, { loading }] = useMutation(LOGIN_USER, {
@@ -37,15 +37,15 @@ function Login(props) {
     loginUser();
   }
   return (
-    <div className='min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8'>
-      <div className='max-w-md w-full space-y-8'>
+    <div className='flex items-center justify-center min-h-full px-4 py-12 sm:px-6 lg:px-8'>
+      <div className='w-full max-w-md space-y-8'>
         <div>
           <img
-            className='mx-auto h-12 w-auto'
+            className='w-auto h-12 mx-auto'
             src='https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'
             alt='Workflow'
           />
-          <h2 className='mt-6 text-center text-3xl font-extrabold text-gray-900'>
+          <h2 className='mt-6 text-3xl font-extrabold text-center text-gray-900'>
             Войдите в аккаун
           </h2>
         </div>
@@ -59,7 +59,7 @@ function Login(props) {
             name='remember'
             defaultValue='true'
           />
-          <div className='rounded-md shadow-sm -space-y-px'>
+          <div className='-space-y-px rounded-md shadow-sm'>
             <div>
               <label
                 htmlFor='email-address'
@@ -99,11 +99,11 @@ function Login(props) {
                 id='remember-me'
                 name='remember-me'
                 type='checkbox'
-                className='h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded'
+                className='w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500'
               />
               <label
                 htmlFor='remember-me'
-                className='ml-2 block text-sm text-gray-900'
+                className='block ml-2 text-sm text-gray-900'
               >
                 Запомнить меня
               </label>
@@ -125,7 +125,7 @@ function Login(props) {
               onClick={onSubmit}
               t
             >
-              <span className='absolute left-0 inset-y-0 flex items-center pl-3'></span>
+              <span className='absolute inset-y-0 left-0 flex items-center pl-3'></span>
               Войти
             </button>
           </div>

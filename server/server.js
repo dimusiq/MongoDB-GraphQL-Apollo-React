@@ -22,6 +22,6 @@ mongoose
   })
   .then((res) => {
     console.log(
-      `Apollo server is up and running on port ${res.port}`,
+      `Apollo server is up and running on port ${res.port}`
     );
   });

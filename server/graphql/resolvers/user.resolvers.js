@@ -19,7 +19,7 @@ module.exports = {
           password,
           confirmPassword,
         },
-      },
+      }
     ) {
       //Do input validation
       if (!username || !email || !password) {
@@ -33,7 +33,7 @@ module.exports = {
         throw new ApolloError(
           'User is already registered with the email: ' +
             email,
-          'USER_ALREADY_EXISTS',
+          'USER_ALREADY_EXISTS'
         );
       }
 
@@ -41,7 +41,7 @@ module.exports = {
       const salt = await bcrypt.genSalt(10);
       const encryptedPassword = await bcrypt.hash(
         password,
-        salt,
+        salt
       );
 
       //Create user
@@ -63,7 +63,7 @@ module.exports = {
     },
     async loginUser(
       _,
-      { loginInput: { email, password } },
+      { loginInput: { email, password } }
     ) {
       // Do input validation
       if (!(email && password)) {
@@ -87,7 +87,7 @@ module.exports = {
       } else {
         throw new ApolloError(
           'Incorrect password',
-          'INCORRECT_PASSWORD',
+          'INCORRECT_PASSWORD'
         );
       }
     },

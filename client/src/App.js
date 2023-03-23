@@ -6,20 +6,21 @@ import Main from './pages/Main';
 import Register from './pages/Register';
 import HomePage from './pages/HomePage';
 import Header from './components/header.component';
+import Auth from './components/Auth';
+import Layout from './components/Layout'
 
 function App() {
-	return (
-		<>
-			<Header />
-			<Routes>
-				<Route path='/' element={<HomePage />} />
-				<Route path='/main' element={<Main />} />
-				{/* <Route path='/' element={<TodoList/>}/> */}
-				<Route path='/login' element={<Login />} />
-				<Route path='/register' element={<Register />} />
-			</Routes>
-		</>
-	);
+  return (
+    <Layout>
+      <Header />
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route path='/main' element={<Main />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
+      </Routes>
+    </Layout>
+  );
 }
 
 export default App;
